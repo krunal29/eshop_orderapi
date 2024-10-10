@@ -1,6 +1,6 @@
 name: Build, Analyze, and Store .NET 8 Project
 
-on:
+on: 
   push:
     branches: [ develop ]
   pull_request:
