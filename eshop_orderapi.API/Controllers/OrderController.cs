@@ -110,10 +110,15 @@ namespace eshop_orderapi.API.Controllers
             });
         }
 
+
         [HttpDelete]
         public async Task TestApi()
         {
+
+
             string Abc= "";
+
+
         }
     }
 }
