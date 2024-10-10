@@ -87,5 +87,11 @@ namespace eshop_orderapi.API.Controllers
                 return Response(new BooleanResponseModel { Value = flag }, _localizer["ReordNotDeleteSucess"].Value.ToString(), DropMessageType.Error);
             });
         }
+
+        [HttpDelete]
+        public async Task TestApi()
+        {
+            
+        }
     }
 }
