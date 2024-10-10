@@ -1,48 +1,48 @@
-name: SonarCloudSumary
+name: SonarCloud Analysis with PR Comments
 on:
-  push:
-    branches:
-      - develop
   pull_request:
     types: [opened, synchronize, reopened]
+
 jobs:
-  build:
-    name: Build and analyze
-    runs-on: windows-latest
+  sonarcloud:
+    name: SonarCloud Analysis
+    runs-on: ubuntu-latest
     steps:
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
+      - uses: actions/checkout@v3
         with:
-          java-version: 17
-          distribution: 'zulu'
-      - uses: actions/checkout@v4
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
-          fetch-depth: 0
-      - name: Cache SonarCloud packages
-        uses: actions/cache@v4
-        with:
-          path: ~\sonar\cache
-          key: ${{ runner.os }}-sonar
-          restore-keys: ${{ runner.os }}-sonar
-      - name: Cache SonarCloud scanner
-        id: cache-sonar-scanner
-        uses: actions/cache@v4
-        with:
-          path: .\.sonar\scanner
-          key: ${{ runner.os }}-sonar-scanner
-          restore-keys: ${{ runner.os }}-sonar-scanner
-      - name: Install SonarCloud scanner
-        if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
-        shell: powershell
+          args: >
+            -Dsonar.projectKey=krunal29_eshop_orderapi
+            -Dsonar.organization=krunal29-1
+      
+      - name: Fetch SonarCloud issues
+        id: sonar_issues
         run: |
-          New-Item -Path .\.sonar\scanner -ItemType Directory
-          dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
-      - name: Build and analyze
+          ISSUES=$(curl -s -H "Authorization: Bearer ${{ secrets.SONAR_TOKEN }}" \
+            "https://sonarcloud.io/api/issues/search?componentKeys=krunal29_eshop_orderapi&resolved=false" \
+            | jq -c '.issues[] | select(.pullRequest == "${{ github.event.pull_request.number }}")')
+          echo "issues=$ISSUES" >> $GITHUB_OUTPUT
+      
+      - name: Process issues and post comments
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        shell: powershell
         run: |
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"krunal29_eshop_orderapi" /o:"krunal29-1" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.pullrequest.provider=GitHub /d:sonar.pullrequest.github.repository=${{ github.repository }} /d:sonar.pullrequest.key=${{ github.event.pull_request.number }} /d:sonar.pullrequest.branch=${{ github.head_ref }} /d:sonar.pullrequest.base=${{ github.base_ref }}
-          dotnet build
-          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+          ISSUES="${{ steps.sonar_issues.outputs.issues }}"
+          
+          echo "$ISSUES" | jq -c '.' | while read -r issue; do
+            file=$(echo $issue | jq -r '.component' | sed 's/^krunal29_eshop_orderapi://')
+            line=$(echo $issue | jq -r '.line')
+            message=$(echo $issue | jq -r '.message')
+            severity=$(echo $issue | jq -r '.severity')
+            
+            body="**SonarCloud Issue - $severity**\n\n$message"
+            
+            gh pr comment ${{ github.event.pull_request.number }} --body "$body" --file "$file" --line "$line"
+          done
