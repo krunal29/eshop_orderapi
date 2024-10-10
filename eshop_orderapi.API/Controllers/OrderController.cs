@@ -126,11 +126,16 @@ namespace eshop_orderapi.API.Controllers
         {
 
 
+
             string Abc = "";
+            string Abac = "";
+
 
 
         }
 
+
+         
         [HttpDelete]
         public async Task TestApai21()
         {
