@@ -91,7 +91,7 @@ namespace eshop_orderapi.API.Controllers
         [HttpDelete]
         public async Task TestApi()
         {
-            string Abc = 123;
+            string Abc= "";
         }
     }
 }
