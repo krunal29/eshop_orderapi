@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Repositories\IAccessModuleRepository.cs" />
+    <Compile Remove="Repositories\IModuleRepository.cs" />
+    <Compile Remove="Repositories\IPersonRepository.cs" />
+    <Compile Remove="Repositories\IRoleModuleRepository.cs" />
+    <Compile Remove="Repositories\IRoleRepository.cs" />
+    <Compile Remove="Services\IPersonService.cs" />
+    <Compile Remove="Services\IRoleModuleService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Database\eshop_orderapi.Domain\eshop_orderapi.Domain.csproj" />
+    <ProjectReference Include="..\eshop_orderapi.Business\eshop_orderapi.Business.csproj" />
+  </ItemGroup>
+
+</Project>

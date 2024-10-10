@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\eshop_orderapi.Interfaces\eshop_orderapi.Interfaces.csproj" />
+    <ProjectReference Include="..\eshop_orderapi.Repositories\eshop_orderapi.Repositories.csproj" />
+  </ItemGroup>
+
+</Project>

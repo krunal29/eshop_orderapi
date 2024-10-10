@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Templates\ForgotPassword.cshtml" />
+    <None Remove="Templates\WelcomeEmail.cshtml" />
+    <None Remove="Templates\_Layout.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Templates\ForgotPassword.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Templates\_Layout.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Templates\WelcomeEmail.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.6.0" />
+    <PackageReference Include="RazorEngine.NetCore" Version="3.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Business\eshop_orderapi.Business\eshop_orderapi.Business.csproj" />
+    <ProjectReference Include="..\..\Business\eshop_orderapi.Interfaces\eshop_orderapi.Interfaces.csproj" />
+      </ItemGroup>
+
+</Project>

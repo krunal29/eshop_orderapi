@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="PersonService.cs" />
+    <Compile Remove="RoleModuleService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="Hangfire.Core" Version="1.8.12" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\eshop_orderapi.Business\eshop_orderapi.Business.csproj" />
+    <ProjectReference Include="..\eshop_orderapi.UoW\eshop_orderapi.UoW.csproj" />
+  </ItemGroup>
+
+</Project>

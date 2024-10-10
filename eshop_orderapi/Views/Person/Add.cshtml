@@ -1,0 +1,35 @@
+@model eshop_orderapi.Business.ViewModels.PersonModel
+
+@{
+    Layout = "~/Views/Shared/_DialogLayout.cshtml";
+    ViewBag.Title = "Add Person";
+}
+@using (Html.BeginForm("Add", "Person", FormMethod.Post, new { id = "personForm", role = "form", @class = "kt-form" }))
+{
+    @(Html.HiddenFor(m => m.Id))
+    <div class="modal-header">
+        <h4 class="modal-title" id="modalHeading">
+            Add Person
+        </h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <img src="/images/icons/icon-close.png" alt="">
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row m-0">
+            <div class="col-md-12 p-0">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Name)<span class="required">*</span>
+                    <div class="selval">
+                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @maxlength = "50", autocomplete = "off" })
+                        @Html.ValidationMessageFor(m => m.Name)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" title="Cancel"> Cancel </button>
+        <button type="submit" class="btn btn-primary" title="Submit"> Submit </button>
+    </div>
+}

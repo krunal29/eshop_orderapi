@@ -1,0 +1,28 @@
+@model eshop_orderapi.Business.ViewModels.PersonModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Login</h1>
+
+@using (Html.BeginForm("Login", "Login", FormMethod.Post, new { id = "loginForm", role = "form" }))
+{
+    <input type="hidden" value="@ViewBag.redirectUrl" id="redirectUrl" name="redirectUrl">
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name)<span class="required" style="color:red">*</span>
+        <div class="selval">
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Name)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Password)<span class="required" style="color:red">*</span>
+        <div class="selval">
+            @Html.TextBoxFor(m => m.Password, new { @type = "password", @class = "form-control", @Value = "Demo" })
+            @Html.ValidationMessageFor(m => m.Password)
+        </div>
+        <br />
+        <span>Name:DemoUser ,Password: iFour@1234</span>
+    </div>
+    <button type="submit">SignIn</button>
+}

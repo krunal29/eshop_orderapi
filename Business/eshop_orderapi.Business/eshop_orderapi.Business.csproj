@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="ConfigurationManager.cs" />
+    <Compile Remove="Helpers\ApiHelper.cs" />
+    <Compile Remove="Helpers\CommonHelper.cs" />
+    <Compile Remove="Helpers\DateTimeHelper.cs" />
+    <Compile Remove="Helpers\EnumHelper.cs" />
+    <Compile Remove="Helpers\FileHelper.cs" />
+    <Compile Remove="Helpers\IFileHelper.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Extensions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="6.0.14" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="System.Drawing.Common" Version="8.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Database\eshop_orderapi.Domain\eshop_orderapi.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "hOABcy3MYkTAsK1M+lNMnoI/4tEHYFr8/0zK4sqoh4w=",
+  "Source": "eshop_order.API",
+  "BasePath": "_content/eshop_order.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

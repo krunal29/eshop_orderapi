@@ -1,0 +1,25 @@
+@model List<eshop_orderapi.Business.ViewModels.PersonModel>
+
+<a data-click-dialog="@(Url.Action("Add", "Person", new { id = 0 }))" class="btn-create"> Add Person </a>
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                @foreach (var person in Model)
+                {
+                    <tr>
+                        <td>@person.Id</td>
+                        <td>@person.Name</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
