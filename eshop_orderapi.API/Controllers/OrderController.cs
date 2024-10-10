@@ -86,6 +86,27 @@ namespace eshop_orderapi.API.Controllers
                     return Response(new BooleanResponseModel { Value = flag }, _localizer["RecordDeleteSuccess"].Value.ToString());
                 return Response(new BooleanResponseModel { Value = flag }, _localizer["ReordNotDeleteSucess"].Value.ToString(), DropMessageType.Error);
             });
+            return await GetDataWithMessage(async () =>
+            {
+                var flag = await _OrderService.DeleteAsync(id);
+                if (flag)
+                    return Response(new BooleanResponseModel { Value = flag }, _localizer["RecordDeleteSuccess"].Value.ToString());
+                return Response(new BooleanResponseModel { Value = flag }, _localizer["ReordNotDeleteSucess"].Value.ToString(), DropMessageType.Error);
+            });
+            return await GetDataWithMessage(async () =>
+            {
+                var flag = await _OrderService.DeleteAsync(id);
+                if (flag)
+                    return Response(new BooleanResponseModel { Value = flag }, _localizer["RecordDeleteSuccess"].Value.ToString());
+                return Response(new BooleanResponseModel { Value = flag }, _localizer["ReordNotDeleteSucess"].Value.ToString(), DropMessageType.Error);
+            });
+            return await GetDataWithMessage(async () =>
+            {
+                var flag = await _OrderService.DeleteAsync(id);
+                if (flag)
+                    return Response(new BooleanResponseModel { Value = flag }, _localizer["RecordDeleteSuccess"].Value.ToString());
+                return Response(new BooleanResponseModel { Value = flag }, _localizer["ReordNotDeleteSucess"].Value.ToString(), DropMessageType.Error);
+            });
         }
 
         [HttpDelete]
